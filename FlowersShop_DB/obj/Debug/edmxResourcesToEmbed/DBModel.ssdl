@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище flowersDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="buy_tb">
+    <Key>
+      <PropertyRef Name="id_b" />
+    </Key>
+    <Property Name="id_b" Type="int" Nullable="false" StoreGeneratedPattern="None" />
+    <Property Name="idF_b" Type="int" />
+    <Property Name="count_b" Type="int" />
+    <Property Name="date_b" Type="date" />
+    <Property Name="sale_b" Type="int" />
+  </EntityType>
+  <EntityType Name="flower_tb">
+    <Key>
+      <PropertyRef Name="id_f" />
+    </Key>
+    <Property Name="id_f" Type="int" Nullable="false" StoreGeneratedPattern="None" />
+    <Property Name="name_f" Type="varchar" MaxLength="30" />
+    <Property Name="idT_f" Type="int" />
+    <Property Name="cost_f" Type="int" />
+    <Property Name="count_f" Type="int" />
+    <Property Name="availability_f" Type="bit" />
+  </EntityType>
+  <EntityType Name="type_tb">
+    <Key>
+      <PropertyRef Name="id_t" />
+    </Key>
+    <Property Name="id_t" Type="int" Nullable="false" StoreGeneratedPattern="None" />
+    <Property Name="name_t" Type="varchar" MaxLength="30" />
+    <Property Name="colour_t" Type="varchar" MaxLength="30" />
+    <Property Name="term_t" Type="int" />
+    <Property Name="availability_t" Type="bit" />
+    <Property Name="photo_t" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <Association Name="FK__buy_tb__idF_b__286302EC">
+    <End Role="flower_tb" Type="Self.flower_tb" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="buy_tb" Type="Self.buy_tb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="flower_tb">
+        <PropertyRef Name="id_f" />
+      </Principal>
+      <Dependent Role="buy_tb">
+        <PropertyRef Name="idF_b" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__flower_tb__idT_f__25869641">
+    <End Role="type_tb" Type="Self.type_tb" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="flower_tb" Type="Self.flower_tb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="type_tb">
+        <PropertyRef Name="id_t" />
+      </Principal>
+      <Dependent Role="flower_tb">
+        <PropertyRef Name="idT_f" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище flowersDBModelContainer">
+    <EntitySet Name="buy_tb" EntityType="Self.buy_tb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="flower_tb" EntityType="Self.flower_tb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="type_tb" EntityType="Self.type_tb" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__buy_tb__idF_b__286302EC" Association="Self.FK__buy_tb__idF_b__286302EC">
+      <End Role="flower_tb" EntitySet="flower_tb" />
+      <End Role="buy_tb" EntitySet="buy_tb" />
+    </AssociationSet>
+    <AssociationSet Name="FK__flower_tb__idT_f__25869641" Association="Self.FK__flower_tb__idT_f__25869641">
+      <End Role="type_tb" EntitySet="type_tb" />
+      <End Role="flower_tb" EntitySet="flower_tb" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

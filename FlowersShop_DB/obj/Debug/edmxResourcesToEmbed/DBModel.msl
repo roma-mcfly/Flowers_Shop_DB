@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище flowersDBModelContainer" CdmEntityContainer="flowersDBEntities">
+    <EntitySetMapping Name="buy_tb">
+      <EntityTypeMapping TypeName="flowersDBModel.buy_tb">
+        <MappingFragment StoreEntitySet="buy_tb">
+          <ScalarProperty Name="id_b" ColumnName="id_b" />
+          <ScalarProperty Name="idF_b" ColumnName="idF_b" />
+          <ScalarProperty Name="count_b" ColumnName="count_b" />
+          <ScalarProperty Name="date_b" ColumnName="date_b" />
+          <ScalarProperty Name="sale_b" ColumnName="sale_b" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="flower_tb">
+      <EntityTypeMapping TypeName="flowersDBModel.flower_tb">
+        <MappingFragment StoreEntitySet="flower_tb">
+          <ScalarProperty Name="id_f" ColumnName="id_f" />
+          <ScalarProperty Name="name_f" ColumnName="name_f" />
+          <ScalarProperty Name="idT_f" ColumnName="idT_f" />
+          <ScalarProperty Name="cost_f" ColumnName="cost_f" />
+          <ScalarProperty Name="count_f" ColumnName="count_f" />
+          <ScalarProperty Name="availability_f" ColumnName="availability_f" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="type_tb">
+      <EntityTypeMapping TypeName="flowersDBModel.type_tb">
+        <MappingFragment StoreEntitySet="type_tb">
+          <ScalarProperty Name="id_t" ColumnName="id_t" />
+          <ScalarProperty Name="name_t" ColumnName="name_t" />
+          <ScalarProperty Name="colour_t" ColumnName="colour_t" />
+          <ScalarProperty Name="term_t" ColumnName="term_t" />
+          <ScalarProperty Name="availability_t" ColumnName="availability_t" />
+          <ScalarProperty Name="photo_t" ColumnName="photo_t" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

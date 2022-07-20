@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="flowersDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="buy_tb">
+    <Key>
+      <PropertyRef Name="id_b" />
+    </Key>
+    <Property Name="id_b" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="idF_b" Type="Int32" />
+    <Property Name="count_b" Type="Int32" />
+    <Property Name="date_b" Type="DateTime" Precision="0" />
+    <Property Name="sale_b" Type="Int32" />
+    <NavigationProperty Name="flower_tb" Relationship="Self.FK__buy_tb__idF_b__286302EC" FromRole="buy_tb" ToRole="flower_tb" />
+  </EntityType>
+  <EntityType Name="flower_tb">
+    <Key>
+      <PropertyRef Name="id_f" />
+    </Key>
+    <Property Name="id_f" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="name_f" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="idT_f" Type="Int32" />
+    <Property Name="cost_f" Type="Int32" />
+    <Property Name="count_f" Type="Int32" />
+    <Property Name="availability_f" Type="Boolean" />
+    <NavigationProperty Name="buy_tb" Relationship="Self.FK__buy_tb__idF_b__286302EC" FromRole="flower_tb" ToRole="buy_tb" />
+    <NavigationProperty Name="type_tb" Relationship="Self.FK__flower_tb__idT_f__25869641" FromRole="flower_tb" ToRole="type_tb" />
+  </EntityType>
+  <EntityType Name="type_tb">
+    <Key>
+      <PropertyRef Name="id_t" />
+    </Key>
+    <Property Name="id_t" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="name_t" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="colour_t" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="term_t" Type="Int32" />
+    <Property Name="availability_t" Type="Boolean" />
+    <Property Name="photo_t" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="flower_tb" Relationship="Self.FK__flower_tb__idT_f__25869641" FromRole="type_tb" ToRole="flower_tb" />
+  </EntityType>
+  <Association Name="FK__buy_tb__idF_b__286302EC">
+    <End Role="flower_tb" Type="Self.flower_tb" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="buy_tb" Type="Self.buy_tb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="flower_tb">
+        <PropertyRef Name="id_f" />
+      </Principal>
+      <Dependent Role="buy_tb">
+        <PropertyRef Name="idF_b" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__flower_tb__idT_f__25869641">
+    <End Role="type_tb" Type="Self.type_tb" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="flower_tb" Type="Self.flower_tb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="type_tb">
+        <PropertyRef Name="id_t" />
+      </Principal>
+      <Dependent Role="flower_tb">
+        <PropertyRef Name="idT_f" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="flowersDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="buy_tb" EntityType="Self.buy_tb" />
+    <EntitySet Name="flower_tb" EntityType="Self.flower_tb" />
+    <EntitySet Name="type_tb" EntityType="Self.type_tb" />
+    <AssociationSet Name="FK__buy_tb__idF_b__286302EC" Association="Self.FK__buy_tb__idF_b__286302EC">
+      <End Role="flower_tb" EntitySet="flower_tb" />
+      <End Role="buy_tb" EntitySet="buy_tb" />
+    </AssociationSet>
+    <AssociationSet Name="FK__flower_tb__idT_f__25869641" Association="Self.FK__flower_tb__idT_f__25869641">
+      <End Role="type_tb" EntitySet="type_tb" />
+      <End Role="flower_tb" EntitySet="flower_tb" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

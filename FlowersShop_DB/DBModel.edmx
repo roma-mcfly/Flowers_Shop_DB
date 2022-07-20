@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище flowersDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="buy_tb">
+          <Key>
+            <PropertyRef Name="id_b" />
+          </Key>
+          <Property Name="id_b" Type="int" Nullable="false" StoreGeneratedPattern="None" />
+          <Property Name="idF_b" Type="int" />
+          <Property Name="count_b" Type="int" />
+          <Property Name="date_b" Type="date" />
+          <Property Name="sale_b" Type="int" />
+        </EntityType>
+        <EntityType Name="flower_tb">
+          <Key>
+            <PropertyRef Name="id_f" />
+          </Key>
+          <Property Name="id_f" Type="int" Nullable="false" StoreGeneratedPattern="None" />
+          <Property Name="name_f" Type="varchar" MaxLength="30" />
+          <Property Name="idT_f" Type="int" />
+          <Property Name="cost_f" Type="int" />
+          <Property Name="count_f" Type="int" />
+          <Property Name="availability_f" Type="bit" />
+        </EntityType>
+        <EntityType Name="type_tb">
+          <Key>
+            <PropertyRef Name="id_t" />
+          </Key>
+          <Property Name="id_t" Type="int" Nullable="false" StoreGeneratedPattern="None" />
+          <Property Name="name_t" Type="varchar" MaxLength="30" />
+          <Property Name="colour_t" Type="varchar" MaxLength="30" />
+          <Property Name="term_t" Type="int" />
+          <Property Name="availability_t" Type="bit" />
+          <Property Name="photo_t" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <Association Name="FK__buy_tb__idF_b__286302EC">
+          <End Role="flower_tb" Type="Self.flower_tb" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="buy_tb" Type="Self.buy_tb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="flower_tb">
+              <PropertyRef Name="id_f" />
+            </Principal>
+            <Dependent Role="buy_tb">
+              <PropertyRef Name="idF_b" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__flower_tb__idT_f__25869641">
+          <End Role="type_tb" Type="Self.type_tb" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="flower_tb" Type="Self.flower_tb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="type_tb">
+              <PropertyRef Name="id_t" />
+            </Principal>
+            <Dependent Role="flower_tb">
+              <PropertyRef Name="idT_f" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище flowersDBModelContainer">
+          <EntitySet Name="buy_tb" EntityType="Self.buy_tb" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="flower_tb" EntityType="Self.flower_tb" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="type_tb" EntityType="Self.type_tb" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__buy_tb__idF_b__286302EC" Association="Self.FK__buy_tb__idF_b__286302EC">
+            <End Role="flower_tb" EntitySet="flower_tb" />
+            <End Role="buy_tb" EntitySet="buy_tb" />
+          </AssociationSet>
+          <AssociationSet Name="FK__flower_tb__idT_f__25869641" Association="Self.FK__flower_tb__idT_f__25869641">
+            <End Role="type_tb" EntitySet="type_tb" />
+            <End Role="flower_tb" EntitySet="flower_tb" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="flowersDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="buy_tb">
+          <Key>
+            <PropertyRef Name="id_b" />
+          </Key>
+          <Property Name="id_b" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="idF_b" Type="Int32" />
+          <Property Name="count_b" Type="Int32" />
+          <Property Name="date_b" Type="DateTime" Precision="0" />
+          <Property Name="sale_b" Type="Int32" />
+          <NavigationProperty Name="flower_tb" Relationship="Self.FK__buy_tb__idF_b__286302EC" FromRole="buy_tb" ToRole="flower_tb" />
+        </EntityType>
+        <EntityType Name="flower_tb">
+          <Key>
+            <PropertyRef Name="id_f" />
+          </Key>
+          <Property Name="id_f" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="name_f" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="idT_f" Type="Int32" />
+          <Property Name="cost_f" Type="Int32" />
+          <Property Name="count_f" Type="Int32" />
+          <Property Name="availability_f" Type="Boolean" />
+          <NavigationProperty Name="buy_tb" Relationship="Self.FK__buy_tb__idF_b__286302EC" FromRole="flower_tb" ToRole="buy_tb" />
+          <NavigationProperty Name="type_tb" Relationship="Self.FK__flower_tb__idT_f__25869641" FromRole="flower_tb" ToRole="type_tb" />
+        </EntityType>
+        <EntityType Name="type_tb">
+          <Key>
+            <PropertyRef Name="id_t" />
+          </Key>
+          <Property Name="id_t" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="name_t" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="colour_t" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="term_t" Type="Int32" />
+          <Property Name="availability_t" Type="Boolean" />
+          <Property Name="photo_t" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="flower_tb" Relationship="Self.FK__flower_tb__idT_f__25869641" FromRole="type_tb" ToRole="flower_tb" />
+        </EntityType>
+        <Association Name="FK__buy_tb__idF_b__286302EC">
+          <End Role="flower_tb" Type="Self.flower_tb" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="buy_tb" Type="Self.buy_tb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="flower_tb">
+              <PropertyRef Name="id_f" />
+            </Principal>
+            <Dependent Role="buy_tb">
+              <PropertyRef Name="idF_b" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__flower_tb__idT_f__25869641">
+          <End Role="type_tb" Type="Self.type_tb" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="flower_tb" Type="Self.flower_tb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="type_tb">
+              <PropertyRef Name="id_t" />
+            </Principal>
+            <Dependent Role="flower_tb">
+              <PropertyRef Name="idT_f" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="flowersDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="buy_tb" EntityType="Self.buy_tb" />
+          <EntitySet Name="flower_tb" EntityType="Self.flower_tb" />
+          <EntitySet Name="type_tb" EntityType="Self.type_tb" />
+          <AssociationSet Name="FK__buy_tb__idF_b__286302EC" Association="Self.FK__buy_tb__idF_b__286302EC">
+            <End Role="flower_tb" EntitySet="flower_tb" />
+            <End Role="buy_tb" EntitySet="buy_tb" />
+          </AssociationSet>
+          <AssociationSet Name="FK__flower_tb__idT_f__25869641" Association="Self.FK__flower_tb__idT_f__25869641">
+            <End Role="type_tb" EntitySet="type_tb" />
+            <End Role="flower_tb" EntitySet="flower_tb" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище flowersDBModelContainer" CdmEntityContainer="flowersDBEntities">
+          <EntitySetMapping Name="buy_tb">
+            <EntityTypeMapping TypeName="flowersDBModel.buy_tb">
+              <MappingFragment StoreEntitySet="buy_tb">
+                <ScalarProperty Name="id_b" ColumnName="id_b" />
+                <ScalarProperty Name="idF_b" ColumnName="idF_b" />
+                <ScalarProperty Name="count_b" ColumnName="count_b" />
+                <ScalarProperty Name="date_b" ColumnName="date_b" />
+                <ScalarProperty Name="sale_b" ColumnName="sale_b" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="flower_tb">
+            <EntityTypeMapping TypeName="flowersDBModel.flower_tb">
+              <MappingFragment StoreEntitySet="flower_tb">
+                <ScalarProperty Name="id_f" ColumnName="id_f" />
+                <ScalarProperty Name="name_f" ColumnName="name_f" />
+                <ScalarProperty Name="idT_f" ColumnName="idT_f" />
+                <ScalarProperty Name="cost_f" ColumnName="cost_f" />
+                <ScalarProperty Name="count_f" ColumnName="count_f" />
+                <ScalarProperty Name="availability_f" ColumnName="availability_f" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="type_tb">
+            <EntityTypeMapping TypeName="flowersDBModel.type_tb">
+              <MappingFragment StoreEntitySet="type_tb">
+                <ScalarProperty Name="id_t" ColumnName="id_t" />
+                <ScalarProperty Name="name_t" ColumnName="name_t" />
+                <ScalarProperty Name="colour_t" ColumnName="colour_t" />
+                <ScalarProperty Name="term_t" ColumnName="term_t" />
+                <ScalarProperty Name="availability_t" ColumnName="availability_t" />
+                <ScalarProperty Name="photo_t" ColumnName="photo_t" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
